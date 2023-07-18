@@ -79,9 +79,7 @@ posts.forEach((element) => {
     /* Splits "created" value into an array ("splitDate"), than assembles 
     "splitDate" elements to get USA or ITA date format. */
     const splitDate = element.created.split("-");
-
     const USADate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
-
     const ITADate = `${splitDate[2]}/${splitDate[1]}/${splitDate[0]}`;
 
     /* Creates variable for post header, adds "post__header" class, appends it 
@@ -134,6 +132,41 @@ posts.forEach((element) => {
 
     }
 )
+
+
+//Null img sub mechanism.
+
+const imgSubContainerElements = document.querySelectorAll(".post-meta__icon");
+
+imgSubContainerElements.forEach((element, i) => {
+
+/* Splits "name" value into an array ("splitName"), than saves the first name 
+in "firstName" array and the last name in "lastName" array, than creates "imgSub" 
+with "firstName" and "lastName" first index elements (uppercase initials). */
+const splitName = posts[i].author.name.split(" ");
+const firstName = splitName[0];
+const lastName = splitName[1];
+const imgSub = `${firstName[0]}${lastName[0]}`
+
+if (posts[i].author.image === null) {
+
+    element.innerHTML = imgSub;
+
+}
+
+} )
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Creates empty array where to save id's of liked posts on click.
 const likedPosts = [];
