@@ -1,7 +1,9 @@
 //Creates variable for the posts container (html element).
 const postListElement = document.querySelector(".posts-list");
 
-//Creates an array of objects (every object has info for each post's content).
+/* Creates an array of objects (every object has info for each post's 
+content). A "liked" property has been added to every object, see 
+"addEventListener" below. */
 const posts = [
     {
         "id": 1,
@@ -12,7 +14,8 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
-        "created": "2021-06-25"
+        "created": "2021-06-25",
+        "liked": false
     },
     {
         "id": 2,
@@ -23,7 +26,8 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "2021-09-03",
+        "liked": false
     },
     {
         "id": 3,
@@ -34,7 +38,8 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "2021-05-15"
+        "created": "2021-05-15",
+        "liked": false
     },
     {
         "id": 4,
@@ -45,7 +50,8 @@ const posts = [
             "image": null
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "2021-04-03",
+        "liked": false
     },
     {
         "id": 5,
@@ -56,7 +62,8 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "2021-03-05"
+        "created": "2021-03-05",
+        "liked": false
     }
 ];
 
@@ -141,9 +148,26 @@ likeBtnElements.forEach((element, i) => {
     //"addEventListener" for click on each "likeBtnElements".
     element.addEventListener("click", function(){
 
+        /* If like button already pressed, decreases counter and 
+        takes away blue color */
+        if (posts[i].liked === true) {
+
+            posts[i].likes--;
+
+            likeCounterElements[i].innerHTML = posts[i].likes;
+
+            likeIconElements[i].classList.remove("blue-icon");
+
+            posts[i].liked = false;
+
+            return 0;
+        }
+
         /* Increases the "likes" property in each "posts" object, 
         using "i" as index (is the same as the clicked "likeBtnElements"). */
         posts[i].likes++;
+
+        posts[i].liked = true;
 
         /* Outputs the increased "likes" value into the "likeCounterElements" 
         using "innerHtml" (still uses "i" as index to ge the right one). */
