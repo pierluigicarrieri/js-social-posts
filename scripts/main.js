@@ -1,3 +1,5 @@
+const postList = document.querySelector(".posts-list");
+
 const posts = [
     {
         "id": 1,
@@ -55,3 +57,52 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+posts.forEach((element) => {
+
+    const postElement = document.createElement("div");
+    postElement.classList.add("post");
+    postList.append(postElement);
+
+    const postHeaderElement = document.createElement("div");
+    postHeaderElement.classList.add("post__header");
+    postElement.append(postHeaderElement);
+    postHeaderElement.innerHTML +=
+    `<div class="post-meta">                    
+        <div class="post-meta__icon">
+            <img class="profile-pic" src=${element.author.image} alt=${element.author.name}>                    
+        </div>
+        <div class="post-meta__data">
+            <div class="post-meta__author">${element.author.name}</div>
+            <div class="post-meta__time">${element.created}</div>
+        </div>                    
+    </div>`
+
+    const postTextElement = document.createElement("div");
+    postTextElement.classList.add("post__text");
+    postElement.append(postTextElement);
+    postTextElement.innerHTML += element.content;
+
+    const postImageElement = document.createElement("div");
+    postImageElement.classList.add("post__image");
+    postElement.append(postImageElement);
+    postImageElement.innerHTML += `<img src=${element.media} alt="">`
+
+    const postFooterElement = document.createElement("div");
+    postFooterElement.classList.add("post__footer");
+    postElement.append(postFooterElement);
+    postFooterElement.innerHTML += 
+    `<div class="likes js-likes">
+        <div class="likes__cta">
+            <a class="like-button  js-like-button" href="#" data-postid="1">
+                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                <span class="like-button__label">Mi Piace</span>
+            </a>
+        </div>
+        <div class="likes__counter">
+            Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+        </div>
+    </div>`
+
+    }
+)
