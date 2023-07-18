@@ -134,6 +134,7 @@ posts.forEach((element) => {
 )
 
 
+
 //Null img sub mechanism.
 
 const imgSubContainerElements = document.querySelectorAll(".post-meta__icon");
@@ -158,15 +159,7 @@ if (posts[i].author.image === null) {
 
 
 
-
-
-
-
-
-
-
-
-
+//Likes mechanism
 
 //Creates empty array where to save id's of liked posts on click.
 const likedPosts = [];
