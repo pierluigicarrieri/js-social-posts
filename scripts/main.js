@@ -64,6 +64,10 @@ posts.forEach((element) => {
     postElement.classList.add("post");
     postList.append(postElement);
 
+    const splitDate = element.created.split("-");
+
+    const USADate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
+
     const postHeaderElement = document.createElement("div");
     postHeaderElement.classList.add("post__header");
     postElement.append(postHeaderElement);
@@ -74,19 +78,22 @@ posts.forEach((element) => {
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${element.author.name}</div>
-            <div class="post-meta__time">${element.created}</div>
+            <div class="post-meta__time">${USADate}</div>
         </div>                    
     </div>`
+
 
     const postTextElement = document.createElement("div");
     postTextElement.classList.add("post__text");
     postElement.append(postTextElement);
     postTextElement.innerHTML += element.content;
 
+
     const postImageElement = document.createElement("div");
     postImageElement.classList.add("post__image");
     postElement.append(postImageElement);
     postImageElement.innerHTML += `<img src=${element.media} alt="">`
+
 
     const postFooterElement = document.createElement("div");
     postFooterElement.classList.add("post__footer");
