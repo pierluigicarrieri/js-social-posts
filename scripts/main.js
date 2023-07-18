@@ -77,10 +77,12 @@ posts.forEach((element) => {
     postListElement.append(postElement);
 
     /* Splits "created" value into an array ("splitDate"), than assembles 
-    "splitDate" elements to get USA date format. */
+    "splitDate" elements to get USA or ITA date format. */
     const splitDate = element.created.split("-");
 
     const USADate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
+
+    const ITADate = `${splitDate[2]}/${splitDate[1]}/${splitDate[0]}`;
 
     /* Creates variable for post header, adds "post__header" class, appends it 
     to "postElement", adds innerHtml to "postHeaderElement". */
@@ -94,7 +96,7 @@ posts.forEach((element) => {
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${element.author.name}</div>
-            <div class="post-meta__time">${USADate}</div>
+            <div class="post-meta__time">${ITADate}</div>
         </div>                    
     </div>`
 
