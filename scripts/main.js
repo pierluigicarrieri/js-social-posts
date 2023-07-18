@@ -1,7 +1,7 @@
-const postList = document.querySelector(".posts-list");
+//Creates variable for the posts container (html element).
+const postListElement = document.querySelector(".posts-list");
 
-const likedPosts = [];
-
+//Creates an array of objects (every object has info for each post's content).
 const posts = [
     {
         "id": 1,
@@ -60,16 +60,23 @@ const posts = [
     }
 ];
 
+//"forEach" cycles "posts".
 posts.forEach((element) => {
 
+    /* Creates variable for single post container, adds "post" class, appends it 
+    to "postListElement". */
     const postElement = document.createElement("div");
     postElement.classList.add("post");
-    postList.append(postElement);
+    postListElement.append(postElement);
 
+    /* Splits "created" value into an array ("splitDate"), than assembles 
+    "splitDate" elements to get USA date format. */
     const splitDate = element.created.split("-");
 
     const USADate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
 
+    /* Creates variable for post header, adds "post__header" class, appends it 
+    to "postElement", adds innerHtml to "postHeaderElement". */
     const postHeaderElement = document.createElement("div");
     postHeaderElement.classList.add("post__header");
     postElement.append(postHeaderElement);
@@ -84,18 +91,22 @@ posts.forEach((element) => {
         </div>                    
     </div>`
 
-
+    /* Creates variable for post text, adds "post__text" class, appends it 
+    to "postElement", adds innerHtml to "postTextElement". */
     const postTextElement = document.createElement("div");
     postTextElement.classList.add("post__text");
     postElement.append(postTextElement);
     postTextElement.innerHTML += element.content;
 
-
+    /* Creates variable for post img container, adds "post__image" class, appends 
+    it to "postElement", adds innerHtml to "postImageElement". */
     const postImageElement = document.createElement("div");
     postImageElement.classList.add("post__image");
     postElement.append(postImageElement);
     postImageElement.innerHTML += `<img src=${element.media} alt="">`
 
+    /* Creates variable for post footer, adds "post__footer" class, appends 
+    it to "postElement", adds innerHtml to "postFooterElement". */
     const postFooterElement = document.createElement("div");
     postFooterElement.classList.add("post__footer");
     postElement.append(postFooterElement);
@@ -115,22 +126,34 @@ posts.forEach((element) => {
     }
 )
 
+//Creates empty array where to save id's of liked posts on click.
+const likedPosts = [];
+
+/* Creates variables for all the button elements, all the like counter elements 
+and all the icon elements. */
 const likeBtnElements = document.querySelectorAll(".like-button");
-
 const likeCounterElements = document.querySelectorAll(".js-likes-counter");
-
 const likeIconElements = document.querySelectorAll(".like-button__icon");
 
+//"forEach" cycles "likeBtnElements".
 likeBtnElements.forEach((element, i) => {
     
+    //"addEventListener" for click on each "likeBtnElements".
     element.addEventListener("click", function(){
 
+        /* Increases the "likes" property in each "posts" object, 
+        using "i" as index (is the same as the clicked "likeBtnElements"). */
         posts[i].likes++;
 
+        /* Outputs the increased "likes" value into the "likeCounterElements" 
+        using "innerHtml" (still uses "i" as index to ge the right one). */
         likeCounterElements[i].innerHTML = posts[i].likes;
 
+        /* Puts blue color on "likeIconElements" by adding css class 
+        (still uses "i" as index to ge the right one). */
         likeIconElements[i].classList.add("blue-icon");
 
+        //Pushes id of clicked object into "likedPosts".
         likedPosts.push(posts[i].id);
 
     }
