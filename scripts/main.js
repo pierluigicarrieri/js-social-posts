@@ -1,5 +1,7 @@
 const postList = document.querySelector(".posts-list");
 
+const likedPosts = [];
+
 const posts = [
     {
         "id": 1,
@@ -94,22 +96,45 @@ posts.forEach((element) => {
     postElement.append(postImageElement);
     postImageElement.innerHTML += `<img src=${element.media} alt="">`
 
-
     const postFooterElement = document.createElement("div");
     postFooterElement.classList.add("post__footer");
     postElement.append(postFooterElement);
     postFooterElement.innerHTML += 
     `<div class="likes js-likes">
         <div class="likes__cta">
-            <a class="like-button  js-like-button" href="#" data-postid="1">
+            <a class="like-button js-like-button" href="#" data-postid="1">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                 <span class="like-button__label">Mi Piace</span>
             </a>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+            Piace a <b id="like-counter-${element.id}" class="js-likes-counter">${element.likes}</b> persone
         </div>
     </div>`
 
     }
+)
+
+const likeBtnElements = document.querySelectorAll(".like-button");
+
+const likeCounterElements = document.querySelectorAll(".js-likes-counter");
+
+const likeIconElements = document.querySelectorAll(".like-button__icon");
+
+likeBtnElements.forEach((element, i) => {
+    
+    element.addEventListener("click", function(){
+
+        posts[i].likes++;
+
+        likeCounterElements[i].innerHTML = posts[i].likes;
+
+        likeIconElements[i].classList.add("blue-icon");
+
+        likedPosts.push(posts[i].id);
+
+    }
+    )
+
+}
 )
